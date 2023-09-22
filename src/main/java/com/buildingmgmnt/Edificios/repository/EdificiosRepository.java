@@ -1,6 +1,6 @@
-package com.buildingmgmnt.Edificios.repositories;
+package com.buildingmgmnt.Edificios.repository;
 
-import com.buildingmgmnt.Edificios.models.Edificios;
+import com.buildingmgmnt.Edificios.model.Edificios;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EdificiosRepository extends JpaRepository<Edificios, Integer> {

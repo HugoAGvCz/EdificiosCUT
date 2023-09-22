@@ -1,7 +1,7 @@
-package com.buildingmgmnt.Edificios.controllers;
+package com.buildingmgmnt.Edificios.controller;
 
-import com.buildingmgmnt.Edificios.models.Edificios;
-import com.buildingmgmnt.Edificios.services.EdificiosServiceImpl;
+import com.buildingmgmnt.Edificios.model.Edificios;
+import com.buildingmgmnt.Edificios.service.EdificiosServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +21,19 @@ public class EdificiosController {
     public ResponseEntity<?> getAllEdificios(){
         return ResponseEntity.ok(edificiosService.findAllEdificios());
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteEdificio(@PathVariable int id){
-        edificiosService.deleteEdificios(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
     @GetMapping("/{id}")
     public ResponseEntity<?> getEdificioById(@PathVariable int id){
         return ResponseEntity.ok(edificiosService.getEdificioById(id));
     }
+    @PutMapping("/{id}/update")
+    public ResponseEntity<?> updateEdificio(@RequestBody Edificios edificios, @PathVariable int id){
+        edificiosService.updateEdificios(edificios, id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @DeleteMapping("/{id}/delete")
+    public ResponseEntity<?> deleteEdificio(@PathVariable int id){
+        edificiosService.deleteEdificios(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

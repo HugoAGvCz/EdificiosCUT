@@ -1,14 +1,14 @@
-package com.buildingmgmnt.Edificios.models;
+package com.buildingmgmnt.Edificios.model;
 
 import jakarta.persistence.*;
-
-import java.util.List;
+import org.springframework.lang.NonNull;
 
 @Entity
 public class Edificios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
+    @NonNull
     private String nombre;
 
 
@@ -28,11 +28,4 @@ public class Edificios {
         this.nombre = nombre;
     }
 
-    /*public List<Dispositivos> getDispotivos() {
-        return dispotivos;
-    }
-
-    public void setDispotivos(List<Dispositivos> dispotivos) {
-        this.dispotivos = dispotivos;
-    }*/
 }

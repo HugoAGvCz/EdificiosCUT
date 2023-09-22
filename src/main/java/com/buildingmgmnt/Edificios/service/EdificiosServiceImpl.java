@@ -1,10 +1,11 @@
-package com.buildingmgmnt.Edificios.services;
+package com.buildingmgmnt.Edificios.service;
 
-import com.buildingmgmnt.Edificios.models.Edificios;
-import com.buildingmgmnt.Edificios.repositories.EdificiosRepository;
+import com.buildingmgmnt.Edificios.model.Edificios;
+import com.buildingmgmnt.Edificios.repository.EdificiosRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
+
 @Service
 public class EdificiosServiceImpl implements EdificiosService{
     private final EdificiosRepository repository;
@@ -21,12 +22,19 @@ public class EdificiosServiceImpl implements EdificiosService{
         return repository.findAll();
     }
     @Override
-    public void deleteEdificios(int id){
-        repository.deleteById(id);
-    }
-    @Override
     public Edificios getEdificioById(int id){
         return repository.findById(id).get();
+    }
+    @Override
+    public void updateEdificios(Edificios edificios, int id){
+        Optional<Edificios> edificiosOptional = this.repository.findById(id);
+        Edificios edificioUPD = edificiosOptional.get();
+        edificioUPD.setNombre(edificios.getNombre());
+        repository.save(edificioUPD);
+    }
+    @Override
+    public void deleteEdificios(int id){
+        repository.deleteById(id);
     }
 
 }

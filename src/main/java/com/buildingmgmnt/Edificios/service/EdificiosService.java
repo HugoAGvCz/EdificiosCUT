@@ -15,6 +15,7 @@ public interface EdificiosService {
 
     List<Edificios> getEdificiosByNombre(String nombre);
 
+
     void updateEdificios(Edificios edificios, int id);
     void deleteEdificios(int id);
 

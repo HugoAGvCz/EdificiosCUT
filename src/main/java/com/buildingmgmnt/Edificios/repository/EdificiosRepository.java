@@ -9,5 +9,6 @@ public interface EdificiosRepository extends JpaRepository<Edificios, Integer> {
     boolean existsById(int id);
     boolean existsByNombreAndIdIsNot(String nombre, int id);
     boolean existsByNombre(String nombre);
+
     List<Edificios> getEdificioByNombre(String nombre);
 }

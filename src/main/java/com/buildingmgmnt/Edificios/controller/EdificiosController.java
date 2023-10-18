@@ -32,10 +32,12 @@ public class EdificiosController {
     }
     @GetMapping("/getByNombre/{nombre}")
     public ResponseEntity<?> getEdificiosByNombre(@PathVariable String nombre){
+
         return ResponseEntity.ok(edificiosService.getEdificiosByNombre(nombre));
     }
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateEdificio(@RequestBody Edificios edificios, @PathVariable int id){
+
         edificiosService.updateEdificios(edificios, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

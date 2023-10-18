@@ -40,6 +40,7 @@ public class EdificiosServiceImpl implements EdificiosService{
     @Override
     public List<Edificios> getEdificiosByNombre(String nombre){
         List<Edificios> edificiosList = repository.getEdificioByNombre(nombre);
+
         if (edificiosList.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El nombre del registro no existe.");
         }
@@ -48,13 +49,13 @@ public class EdificiosServiceImpl implements EdificiosService{
     @Override
     public void updateEdificios(Edificios edificios, int id){
         Optional<Edificios> edificiosOptional = this.repository.findById(id);
+
         if (!edificiosOptional.isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El registro no existe.");
         }
         if(repository.existsByNombreAndIdIsNot(edificios.getNombre(), id)){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Ya existe un registro con este nombre.");
         }
-
         Edificios edificioUPD = edificiosOptional.get();
         edificioUPD.setNombre(edificios.getNombre());
         repository.save(edificioUPD);

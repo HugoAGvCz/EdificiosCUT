@@ -28,4 +28,5 @@ public class Edificios {
         this.nombre = nombre;
     }
 
+    //@CrossOrigin(origins = "http://localhost:4200")
 }

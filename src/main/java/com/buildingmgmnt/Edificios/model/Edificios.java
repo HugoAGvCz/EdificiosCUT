@@ -1,14 +1,13 @@
 package com.buildingmgmnt.Edificios.model;
 
-import jakarta.persistence.*;
-import org.springframework.lang.NonNull;
+import jakarta.persistence.*; 
 
 @Entity
 public class Edificios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
-    @NonNull
+    @Column(nullable = false)
     private String nombre;
 
 
@@ -27,6 +26,4 @@ public class Edificios {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    //@CrossOrigin(origins = "http://localhost:4200")
 }

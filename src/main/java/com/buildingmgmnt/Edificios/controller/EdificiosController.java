@@ -37,7 +37,6 @@ public class EdificiosController {
     }
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateEdificio(@RequestBody Edificios edificios, @PathVariable int id){
-
         edificiosService.updateEdificios(edificios, id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

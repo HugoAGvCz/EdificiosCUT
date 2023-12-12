@@ -4,7 +4,6 @@ import com.buildingmgmnt.Edificios.model.Edificios;
 import com.buildingmgmnt.Edificios.repository.EdificiosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,7 +20,7 @@ public class EdificiosServiceImpl implements EdificiosService{
     @Override
     public Edificios saveEdificios(Edificios edificios){
         if(repository.existsByNombre(edificios.getNombre())){
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Ya existe un registro con este nombre.");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Error al crear el registro.");
         }
         return repository.save(edificios);
     }
@@ -40,25 +39,24 @@ public class EdificiosServiceImpl implements EdificiosService{
     @Override
     public List<Edificios> getEdificiosByNombre(String nombre){
         List<Edificios> edificiosList = repository.getEdificioByNombre(nombre);
-
         if (edificiosList.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El nombre del registro no existe.");
         }
         return edificiosList;
     }
     @Override
-    public void updateEdificios(Edificios edificios, int id){
+    public Edificios updateEdificios(Edificios edificios, int id){
         Optional<Edificios> edificiosOptional = this.repository.findById(id);
-
         if (!edificiosOptional.isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El registro no existe.");
         }
         if(repository.existsByNombreAndIdIsNot(edificios.getNombre(), id)){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Ya existe un registro con este nombre.");
         }
+
         Edificios edificioUPD = edificiosOptional.get();
         edificioUPD.setNombre(edificios.getNombre());
-        repository.save(edificioUPD);
+        return repository.save(edificioUPD);
     }
     @Override
     public void deleteEdificios(int id){
